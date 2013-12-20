@@ -307,7 +307,40 @@ secondaryVertexTagInfosCA8CHSprunedSubjets.trackIPTagInfos='impactParameterTagIn
 combinedSecondaryVertexBJetTagsCA8CHSprunedSubjets=combinedSecondaryVertexBJetTags.clone()
 combinedSecondaryVertexBJetTagsCA8CHSprunedSubjets.tagInfos = cms.VInputTag(cms.InputTag("impactParameterTagInfosCA8CHSprunedSubjets"),
     cms.InputTag("secondaryVertexTagInfosCA8CHSprunedSubjets"))
-btaggingCA8CHSprunedSubjets=cms.Sequence(ca8CHSprunedSubjetsJetTracksAssociatorAtVertex+impactParameterTagInfosCA8CHSprunedSubjets+secondaryVertexTagInfosCA8CHSprunedSubjets+combinedSecondaryVertexBJetTagsCA8CHSprunedSubjets)
+
+# simple SV taggers
+simpleSecondaryVertexHighEffBJetTagsCA8CHSprunedSubjets = simpleSecondaryVertexHighEffBJetTags.clone(
+  tagInfos = cms.VInputTag(cms.InputTag("secondaryVertexTagInfosCA8CHSprunedSubjets"))
+)
+simpleSecondaryVertexHighPurBJetTagsCA8CHSprunedSubjets = simpleSecondaryVertexHighPurBJetTags.clone(
+  tagInfos = cms.VInputTag(cms.InputTag("secondaryVertexTagInfosCA8CHSprunedSubjets"))
+)
+## impact parameter based taggers
+# jet probability taggers
+jetProbabilityBJetTagsCA8CHSprunedSubjets = jetProbabilityBJetTags.clone(
+  tagInfos = cms.VInputTag(cms.InputTag("impactParameterTagInfosCA8CHSprunedSubjets"))
+)
+jetBProbabilityBJetTagsCA8CHSprunedSubjets = jetBProbabilityBJetTags.clone(
+  tagInfos = cms.VInputTag(cms.InputTag("impactParameterTagInfosCA8CHSprunedSubjets"))
+)
+# track counting taggers
+trackCountingHighEffBJetTagsCA8CHSprunedSubjets = trackCountingHighEffBJetTags.clone(
+  tagInfos = cms.VInputTag(cms.InputTag("impactParameterTagInfosCA8CHSprunedSubjets"))
+)
+trackCountingHighPurBJetTagsCA8CHSprunedSubjets = trackCountingHighPurBJetTags.clone(
+  tagInfos = cms.VInputTag(cms.InputTag("impactParameterTagInfosCA8CHSprunedSubjets"))
+)
+# b-tagging sequence
+btaggingCA8CHSprunedSubjets=cms.Sequence(ca8CHSprunedSubjetsJetTracksAssociatorAtVertex+
+                            impactParameterTagInfosCA8CHSprunedSubjets+
+                            secondaryVertexTagInfosCA8CHSprunedSubjets+
+                            combinedSecondaryVertexBJetTagsCA8CHSprunedSubjets+
+                            simpleSecondaryVertexHighEffBJetTagsCA8CHSprunedSubjets+
+                            simpleSecondaryVertexHighPurBJetTagsCA8CHSprunedSubjets+
+                            jetProbabilityBJetTagsCA8CHSprunedSubjets+
+                            jetBProbabilityBJetTagsCA8CHSprunedSubjets+
+                            trackCountingHighEffBJetTagsCA8CHSprunedSubjets+
+                            trackCountingHighPurBJetTagsCA8CHSprunedSubjets)
 
 patJetsCA8CHSprunedSubjets = patJets.clone()
 patJetsCA8CHSprunedSubjets.jetSource = cms.InputTag('ca8PFJetsCHSpruned','SubJets')

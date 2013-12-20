@@ -58,7 +58,8 @@ from CMGTools.Production.datasetToSource import *
 
 datasetInfo = (
     'CMS',
-    '/DYJetsToLL_PtZ-100_TuneZ2star_8TeV_ext-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7C-v1/AODSIM',
+    'WWJetsTo2L2Nu_TuneZ2star_8TeV-madgraph-tauola/AODSIM',
+    #'/DYJetsToLL_PtZ-100_TuneZ2star_8TeV_ext-madgraph-tarball/Summer12_DR53X-PU_S10_START53_V7C-v1/AODSIM',
     '.*root')
 process.source = datasetToSource(
     *datasetInfo
@@ -75,8 +76,8 @@ process.source.fileNames = process.source.fileNames[:20]
 #    "/store/group/phys_exotica/leptonsPlusJets/ExoDiBosonResonances/tomei/store/user/tomei/BulkG_ZZ_lljj_M2000_G120-JHU/BulkG_ZZ_lljj_M2000_G120-JHU/c8f8ed334db8a7d6f56c62266b1dfa5b/Bulk_AODSIM_6_1_GAz.root"
 #    ]
 #process.source.fileNames = ['file:root://eoscms//eos/cms/store/cmst3/user/santanas/Samples/AODSIM/BulkG_WW_inclusive_c0p2_M1100_AODSIM_E6E2BD75-6220-E311-98A7-003048FFD79C.root']
-process.source.fileNames = ['file:root://eoscms//eos/cms/store/cmst3/user/santanas/Samples/AODSIM/BulkG_WW_lvjj_c0p2_M1100-JHU-AODSIM.root']
-
+process.source.fileNames = [
+'file:root://osg-se.sprace.org.br//store/user/caber/AbelianZprime_M-2000_hZ_tautauqq_LHCC_NEW-Madgraph5_31072013/AbelianZprime_M-2000_hZ_tautauqq_LHCC-Madgraph5_03082013_V2_AODSIM/c8f8ed334db8a7d6f56c62266b1dfa5b/HZ_TAUTAUJJ_AODSIM_1_1_C6P.root' ]
 ## Maximal Number of Events
 
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(50) )
