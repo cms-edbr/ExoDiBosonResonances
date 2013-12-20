@@ -51,7 +51,7 @@ points is about 2Gb.
 
 #0: copy all scripts in the directory of the cards and move there
 #1: for M in $( cat masses.txt ); do ./make_combined_cards.sh $M ; done
-#2: edit paths and names in run_fullCLs_TF.sh
+#2: edit paths and names in run_fullCLs_TF.sh and run_fullCLs_TF.py
 #2: edit paths and names in gridificateCombine.sh
 #4: for M in $( cat masses.txt ); do ./gridificateCombine.sh $M >> log_gridificate_$(date +%y%m%d).log ; done
 #5: you can monitor all the jobs with this script

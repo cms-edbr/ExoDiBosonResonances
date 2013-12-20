@@ -17,13 +17,16 @@
   t->Branch("quantileExpected",&quantileExpected,"quantileExpected/F");
 
 
-  //  for(int i=600; i!=2550; i=(i+50)) {
   int mass;
-  while (massesfile.good()) {
-    
-    //    int mass = i;
-    massesfile>>mass;
+  string massline;
+
+  while (getline(massesfile,massline)){
+     
+    if(massline.empty()) continue;
+
+    mass = atoi(massline.c_str());
     mh = mass;
+    printf("Harvesting mass %g\n",mass);
     
     limitM2file >> limit;
     quantileExpected = 0.025;
