@@ -21,12 +21,6 @@ cvs co -r V00-02-03  -d TSWilliams/BstdZeeTools  UserCode/TSWilliams/BstdZee/Bst
 cvs co -A -d KStenson/TrackingFilters UserCode/KStenson/TrackingFilters
 
 git clone git://github.com/cms-edbr/ExoDiBosonResonances -b edbr_tautau
-cd ExoDiBosonResonances
-rm -fr AnalysisDataFormats/
-rm -fr EDBRCommon/
-rm -fr EDBRElectron/
-rm -fr GeneratorStudies/
-cd ..
 mv ExoDiBosonResonances/PATtupleProduction/data/Buildfile_KStenson KStenson/TrackingFilters/BuildFile.xml
 rm -rf KStenson/TrackingFilters/src
 mv KStenson/TrackingFilters/plugins KStenson/TrackingFilters/src 
