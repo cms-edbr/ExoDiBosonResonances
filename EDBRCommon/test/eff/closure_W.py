@@ -12,15 +12,19 @@ root.gROOT.SetBatch()        # don't pop up canvases
 root.gROOT.SetStyle('Plain') # white background
 
 histofile = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_BulkG_c0p2_plus_wideRes_final_05_11_2013/efficiency_WW_forClosure.root") #Bulk (narrow + wide)
+#histofile = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_WprimeToWZ_final_05_11_2013/efficiency_WW_forClosure.root") #W'-->WZ (W-->lv , Z-->qq)
 histofile1 = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_RSG_c0p2_final_05_11_2013/efficiency_WW_forClosure.root") #RS
+#histofile1 = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_BulkG_c0p2_Zs_with_Wtag_Matthias_Dec2013/efficiency_Zqq_with_Wtag_Matthias_forClosure.root") #Bulk Z-->qq with W-tag (from Matthias)
+
+
 
 histo_eff_ele   = histofile.Get("eff_ele")
 histo_eff_mu   = histofile.Get("eff_mu")
 #histo_eff_tautoele   = histofile.Get("eff_tautoele")
 #histo_eff_tautomu   = histofile.Get("eff_tautomu")
 histo_eff_event   = histofile.Get("histo_event_eff")
-histo_eff_jet   = histofile.Get("eff_jet")
-#histo_eff_jet   = histofile1.Get("eff_jet")
+#histo_eff_jet   = histofile.Get("eff_jet")
+histo_eff_jet   = histofile1.Get("eff_jet")
 #FOR THE JET: change below at "#flat correction factor from Bulk (W_L) to RS (W_T)" if needed
 
 def deltaPhi(phi1, phi2):
@@ -110,6 +114,9 @@ def processSubsample(file):
         counter      = 0
         for genp in genparticles:
             counter = counter + 1
+            ##
+            if abs(genp.pdgId()) == 6: ##to reject some weird W'-->WZ events
+                break
             ##ele,mu from W-->lv
             if (abs(genp.pdgId())==11 or abs(genp.pdgId())==13) and abs(genp.mother().pdgId())==24 and genp.status()==3:
                 #print "found lepton "+str(genp.pdgId())
@@ -150,8 +157,10 @@ def processSubsample(file):
                     genlepton2p42ndFromTau = genp.p4()
                     genlepton2C2ndFromTau = genp.charge()
                     haveneutralleptonsfromtaus=2
-            ##W-->qq'        
-            if abs(genp.pdgId())==24 and genp.numberOfDaughters()>0 and abs(genp.daughter(1).pdgId())<7 and genp.status()==3:
+            ##W-->qq' (or Z-->qq)        
+            #if abs(genp.pdgId())==24 and genp.numberOfDaughters()>0 and abs(genp.daughter(1).pdgId())<7 and genp.status()==3:
+            if (abs(genp.pdgId())==24 or abs(genp.pdgId())==23) and genp.numberOfDaughters()>0 and abs(genp.daughter(1).pdgId())<7 and genp.status()==3: #Modified to use both W and Z
+
                 genjetp4=genp.p4()
                 if havejet==1: ##exit from loop over gen particles when two hadronic bosons are found since not interesting decays (done to save CPU time)
                     havejet=2
