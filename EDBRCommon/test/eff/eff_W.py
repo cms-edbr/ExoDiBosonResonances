@@ -142,6 +142,7 @@ def processSubsample(file):
     for event in events:
         nevent += 1
         if nevent % 1000 ==0:
+        #if nevent % 1 ==0:
             print "event: " + str(nevent)
 
         #print str(event.eventAuxiliary().run())
@@ -169,7 +170,13 @@ def processSubsample(file):
         counter      = 0
         for genp in genparticles:
             counter = counter + 1
-            ##ele,mu from W-->lv
+            ##
+            if abs(genp.pdgId()) == 6: ##to reject some weird W'-->WZ events
+                break
+            ##if nevent > 1900 and nevent < 2000:
+            ##    print "genp.pdgId(): "+str(genp.pdgId())+" , genp.status(): "+str(genp.status()) + " , genp.mother().pdgId(): " #+ str(genp.mother().pdgId())
+            ##
+            ##ele,mu from W-->lv        
             if (abs(genp.pdgId())==11 or abs(genp.pdgId())==13) and abs(genp.mother().pdgId())==24 and genp.status()==3:
                 #print "found lepton "+str(genp.pdgId())
                 if(abs(genp.pdgId())==11):
@@ -206,8 +213,10 @@ def processSubsample(file):
                     genlepton2p42ndFromTau = genp.p4()
                     genlepton2C2ndFromTau = genp.charge()
                     haveneutralleptonsfromtaus=2
-            ##W-->qq'        
-            if abs(genp.pdgId())==24 and genp.numberOfDaughters()>0 and abs(genp.daughter(1).pdgId())<7 and genp.status()==3:
+            ##W-->qq' (or Z-->qq)
+            #if abs(genp.pdgId())==24 and genp.numberOfDaughters()>0 and abs(genp.daughter(1).pdgId())<7 and genp.status()==3: #Originally used for W efficiency
+            if (abs(genp.pdgId())==24 or abs(genp.pdgId())==23) and genp.numberOfDaughters()>0 and abs(genp.daughter(1).pdgId())<7 and genp.status()==3: #Modified to use both W and Z
+
                 genjetp4=genp.p4()
                 if havejet==1: ##exit from loop over gen particles when two hadronic bosons are found since not interesting decays (done to save CPU time)
                     havejet=2

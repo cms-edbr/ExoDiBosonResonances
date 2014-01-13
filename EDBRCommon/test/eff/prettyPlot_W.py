@@ -19,8 +19,8 @@ def plotPretty(histo,filename,type):
     #fPads1.Draw()
     #fPads1.cd()
     histo.SetMaximum(1)
-    histo.GetXaxis().SetTitle("p_{T,W} [GeV]")
-    histo.GetYaxis().SetTitle("|#eta_{W}|    ")    
+    histo.GetXaxis().SetTitle("Gen p_{T,W} [GeV]")
+    histo.GetYaxis().SetTitle("Gen |#eta_{W}|    ")    
     histo.GetZaxis().SetTitle("Reconstruction #times ID Efficiency")
     histo.GetXaxis().SetTitleOffset(1.1)
     histo.GetYaxis().SetTitleOffset(1.2)
@@ -48,7 +48,7 @@ def plotPretty(histo,filename,type):
     tex.SetLineWidth(2)
     tex.Draw()
 
-    tex2 = root.TLatex(0.721477,0.911329,"#sqrt{s}=8TeV")
+    tex2 = root.TLatex(0.651477,0.911329,"#sqrt{s}=8TeV")
     tex2.SetNDC()
     tex2.SetTextSize(0.044)
     tex2.SetTextFont(42)
@@ -72,7 +72,8 @@ def plotPretty(histo,filename,type):
         tex3.Draw()            
 
     if type==4:
-        tex3 = root.TLatex(0.409497,0.83042,"W_{L} #rightarrow q#bar{q'} #rightarrow 1 jet")
+        tex3 = root.TLatex(0.409497,0.83042,"W_{L} #rightarrow q#bar{q'}") #rightarrow 1 jet")
+        #tex3 = root.TLatex(0.409497,0.83042,"Z_{L} #rightarrow q#bar{q}") #rightarrow 1 jet")
         tex3.SetNDC()
         tex3.SetTextSize(0.044)
         tex3.SetTextFont(42)
@@ -114,7 +115,7 @@ def cleanHisto(histo):
 histofile = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_BulkG_c0p2_plus_wideRes_final_05_11_2013/efficiency_WW.root") #Bulk
 #histofile = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_RSG_c0p2_final_05_11_2013/efficiency_WW.root") #RS pythia (wrong angular distributions)
 #histofile = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_RSG_Madgraph_final_05_11_2013/efficiency_WW.root") #RS madgraph (correct angular distributions)
-
+#histofile = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_WprimeToWZ_final_05_11_2013/efficiency_WW.root") #W'-->WZ
 
 advancedPlots = 1
 
