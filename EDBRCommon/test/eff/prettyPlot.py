@@ -44,7 +44,7 @@ def plotPretty(histo,filename,type):
     tex.SetLineWidth(2)
     tex.Draw()
 
-    tex2 = root.TLatex(0.721477,0.911329,"#sqrt{s}=8TeV")
+    tex2 = root.TLatex(0.651477,0.911329,"#sqrt{s}=8TeV")
     tex2.SetNDC()
     tex2.SetTextSize(0.044)
     tex2.SetTextFont(42)
@@ -67,7 +67,8 @@ def plotPretty(histo,filename,type):
         tex3.SetLineWidth(2)
         tex3.Draw()            
     if type==4:
-        tex3 = root.TLatex(0.509497,0.83042,"Z_{L} #rightarrow q#bar{q} #rightarrow 1 jet")
+        tex3 = root.TLatex(0.509497,0.83042,"Z_{L} #rightarrow q#bar{q}") #rightarrow 1 jet")
+#        tex3 = root.TLatex(0.509497,0.83042,"Z_{L} #rightarrow q#bar{q} #rightarrow 1 jet")
         tex3.SetNDC()
         tex3.SetTextSize(0.044)
         tex3.SetTextFont(42)
