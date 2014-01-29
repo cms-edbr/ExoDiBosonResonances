@@ -4,9 +4,15 @@
 
 cd ${CMSSW_BASE}/src
 
-cvs co -r  CMSSW_5_3_9 HiggsAnalysis/CombinedLimit/
+### Superseded instruction - CVS is no more
+#cvs co -r  CMSSW_5_3_9 HiggsAnalysis/CombinedLimit/
+git cms-addpkg HiggsAnalysis/CombinedLimit
 
-cvs co -r  V03-01-12 HiggsAnalysis/CombinedLimit/interface/HWWLVJRooPdfs.h HiggsAnalysis/CombinedLimit/src/HWWLVJRooPdfs.cxx 
+### Superseded instruction - CVS is no more
+#cvs co -r  V03-01-12 HiggsAnalysis/CombinedLimit/interface/HWWLVJRooPdfs.h HiggsAnalysis/CombinedLimit/src/HWWLVJRooPdfs.cxx 
+cp ${CMSSW_BASE}/src/ExoDiBosonResonances/EDBRCommon/test/fits/extraFilesHWW/HWWLVJRooPdfs.h ${CMSSW_BASE}/src/HiggsAnalysis/CombinedLimit/interface/
+cp ${CMSSW_BASE}/src/ExoDiBosonResonances/EDBRCommon/test/fits/extraFilesHWW/HWWLVJRooPdfs.cxx ${CMSSW_BASE}/src/HiggsAnalysis/CombinedLimit/src/
+
 # these should be put in release of HiggsAnalysis/CombinedLimit/, needed for RooLevelledExp2
 cp ${CMSSW_BASE}/src/ExoDiBosonResonances/EDBRCommon/test/fits/HZZ2L2QRooPdfs.h ${CMSSW_BASE}/src/HiggsAnalysis/CombinedLimit/interface/
 cp ${CMSSW_BASE}/src/ExoDiBosonResonances/EDBRCommon/test/fits/HZZ2L2QRooPdfs.cc ${CMSSW_BASE}/src/HiggsAnalysis/CombinedLimit/src/
