@@ -1,5 +1,4 @@
 
-
 *** additional packages ***
 
 cd ${CMSSW_BASE}/src
@@ -7,6 +6,10 @@ cd ${CMSSW_BASE}/src
 ### Superseded instruction - CVS is no more
 #cvs co -r  CMSSW_5_3_9 HiggsAnalysis/CombinedLimit/
 git cms-addpkg HiggsAnalysis/CombinedLimit
+
+### IMPORTANT - notice that now you're set to use the CMSSW official repository again.
+### If you want to checkout code from the EDBR repository, you have to go back change the repository back to the EDBR one again.
+### See information about that in https://twiki.cern.ch/twiki/bin/view/CMS/ExoDiBosonResonancesGitHowto
 
 ### Superseded instruction - CVS is no more
 #cvs co -r  V03-01-12 HiggsAnalysis/CombinedLimit/interface/HWWLVJRooPdfs.h HiggsAnalysis/CombinedLimit/src/HWWLVJRooPdfs.cxx 
@@ -18,6 +21,8 @@ cp ${CMSSW_BASE}/src/ExoDiBosonResonances/EDBRCommon/test/fits/HZZ2L2QRooPdfs.h 
 cp ${CMSSW_BASE}/src/ExoDiBosonResonances/EDBRCommon/test/fits/HZZ2L2QRooPdfs.cc ${CMSSW_BASE}/src/HiggsAnalysis/CombinedLimit/src/
 cp ${CMSSW_BASE}/src/ExoDiBosonResonances/EDBRCommon/test/fits/LinkDef.h.CombinedLimit ${CMSSW_BASE}/src/HiggsAnalysis/CombinedLimit/src/LinkDef.h
 
+# Compile only the HiggsAnalysis/CombinedLimit part
+cd HiggsAnalysis/CombinedLimit
 scram b -j 4
 cd -
 
