@@ -1,5 +1,9 @@
-
 *** additional packages ***
+
+### IMPORTANT - if you want to run ONLY the statistical analysis part AND you don't have the ExoDiBosonResonances
+### package installed (for instance, you're starting from a clean release area), you need to install the
+### ExoDiBosonResonances AFTER you install the HiggsAnalysis/CombinedLimit package.
+### See [NOTE 1] below.
 
 cd ${CMSSW_BASE}/src
 
@@ -8,8 +12,11 @@ cd ${CMSSW_BASE}/src
 git cms-addpkg HiggsAnalysis/CombinedLimit
 
 ### IMPORTANT - notice that now you're set to use the CMSSW official repository again.
-### If you want to checkout code from the EDBR repository, you have to go back change the repository back to the EDBR one again.
+### You may want to go back and change the repository to the EDBR one again.
 ### See information about that in https://twiki.cern.ch/twiki/bin/view/CMS/ExoDiBosonResonancesGitHowto
+
+### [NOTE 1] Do this only if you don't have the ExoDiBosonResonances package installed
+git clone git://github.com/cms-edbr/ExoDiBosonResonances
 
 ### Superseded instruction - CVS is no more
 #cvs co -r  V03-01-12 HiggsAnalysis/CombinedLimit/interface/HWWLVJRooPdfs.h HiggsAnalysis/CombinedLimit/src/HWWLVJRooPdfs.cxx 
