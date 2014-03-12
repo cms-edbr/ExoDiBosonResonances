@@ -19,9 +19,15 @@ def plotPretty(histo,filename,type):
     #fPads1.Draw()
     #fPads1.cd()
     histo.SetMaximum(1)
-    histo.GetXaxis().SetTitle("Gen p_{T,W} [GeV]")
+    histo.GetXaxis().SetTitle("Gen p_{T}^{W} [GeV]")
     histo.GetYaxis().SetTitle("Gen |#eta_{W}|    ")    
-    histo.GetZaxis().SetTitle("Reconstruction #times ID Efficiency")
+    histo.GetZaxis().SetTitle("Reconstruction #times ID efficiency")
+    histo.GetXaxis().SetTitleFont(42)
+    histo.GetYaxis().SetTitleFont(42)
+    histo.GetZaxis().SetTitleFont(42)
+    histo.GetXaxis().SetLabelFont(42)
+    histo.GetYaxis().SetLabelFont(42)
+    histo.GetZaxis().SetLabelFont(42)
     histo.GetXaxis().SetTitleOffset(1.1)
     histo.GetYaxis().SetTitleOffset(1.2)
     histo.GetZaxis().SetTitleOffset(1.6)
@@ -48,7 +54,7 @@ def plotPretty(histo,filename,type):
     tex.SetLineWidth(2)
     tex.Draw()
 
-    tex2 = root.TLatex(0.651477,0.911329,"#sqrt{s}=8TeV")
+    tex2 = root.TLatex(0.621477,0.911329,"#sqrt{s} = 8 TeV")
     tex2.SetNDC()
     tex2.SetTextSize(0.044)
     tex2.SetTextFont(42)
@@ -56,7 +62,7 @@ def plotPretty(histo,filename,type):
     tex2.Draw()
 
     if type==0:
-        tex3 = root.TLatex(0.409497,0.83042,"W #rightarrow e#nu_{e} / e#nu_{e}#nu_{#tau}#nu_{#tau}")
+        tex3 = root.TLatex(0.409497,0.83042,"W #rightarrow e#nu_{e} & e#nu_{e}#nu_{#tau}#nu_{#tau}")
         tex3.SetNDC()
         tex3.SetTextSize(0.044)
         tex3.SetTextFont(42)
@@ -64,7 +70,7 @@ def plotPretty(histo,filename,type):
         tex3.Draw()            
 
     if type==1:
-        tex3 = root.TLatex(0.409497,0.83042,"W #rightarrow #mu#nu_{#mu} / #mu#nu_{#mu}#nu_{#tau}#nu_{#tau}")
+        tex3 = root.TLatex(0.409497,0.83042,"W #rightarrow #mu#nu_{#mu} & #mu#nu_{#mu}#nu_{#tau}#nu_{#tau}")
         tex3.SetNDC()
         tex3.SetTextSize(0.044)
         tex3.SetTextFont(42)
@@ -73,12 +79,21 @@ def plotPretty(histo,filename,type):
 
     if type==4:
         tex3 = root.TLatex(0.409497,0.83042,"W_{L} #rightarrow q#bar{q'}") #rightarrow 1 jet")
+        #tex3 = root.TLatex(0.509497,0.83042,"W_{L} #rightarrow q#bar{q'}") #rightarrow 1 jet") #moved a bit on the right for WZ
         #tex3 = root.TLatex(0.409497,0.83042,"Z_{L} #rightarrow q#bar{q}") #rightarrow 1 jet")
         tex3.SetNDC()
         tex3.SetTextSize(0.044)
         tex3.SetTextFont(42)
         tex3.SetLineWidth(2)
         tex3.Draw()            
+
+        #only for WZ plot
+        #tex4 = root.TLatex(0.509497,0.78042,"(Z-tagging)")
+        #tex4.SetNDC()
+        #tex4.SetTextSize(0.044)
+        #tex4.SetTextFont(42)
+        #tex4.SetLineWidth(2)
+        #tex4.Draw()            
                 
 #         tex4 = root.TLatex(0.509497,0.83042,"Longitudinal")
 #         tex4.SetNDC()
@@ -116,6 +131,8 @@ histofile = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_C
 #histofile = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_RSG_c0p2_final_05_11_2013/efficiency_WW.root") #RS pythia (wrong angular distributions)
 #histofile = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_RSG_Madgraph_final_05_11_2013/efficiency_WW.root") #RS madgraph (correct angular distributions)
 #histofile = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_WprimeToWZ_final_05_11_2013/efficiency_WW.root") #W'-->WZ
+#histofile = root.TFile.Open("/afs/cern.ch/work/s/santanas/Releases/CMSSW_5_3_9_CMGrel_V5_15_0_ExoDiBosonResonances_GIT_production/CMSSW_5_3_9/src/ExoDiBosonResonances/EDBRCommon/test/eff/plotsEff_BulkG_c0p2_plus_wideRes_Wqq_WithZtag_final_05_11_2013/efficiency_WW.root") #Bulk W-->qq with Z-tag (check #--# in the file, these lines should be removed in this mode)
+
 
 advancedPlots = 1
 
@@ -134,26 +151,26 @@ if advancedPlots == 0:
 
 elif advancedPlots == 1:
 
-    histo_eff_event   = histofile.Get("histo_event_eff")
+    histo_eff_event   = histofile.Get("histo_event_eff") #--#
 
     #take histograms from file
     histo_ele_gen   = histofile.Get("ele_gen")
     histo_ele_genreco   = histofile.Get("ele_genreco")
     histo_mu_gen   = histofile.Get("mu_gen")
     histo_mu_genreco   = histofile.Get("mu_genreco")
-    histo_tautoele_gen   = histofile.Get("tautoele_gen")
-    histo_tautoele_genreco   = histofile.Get("tautoele_genreco")
-    histo_tautomu_gen   = histofile.Get("tautomu_gen")
-    histo_tautomu_genreco   = histofile.Get("tautomu_genreco")
+    histo_tautoele_gen   = histofile.Get("tautoele_gen") #--#
+    histo_tautoele_genreco   = histofile.Get("tautoele_genreco") #--#
+    histo_tautomu_gen   = histofile.Get("tautomu_gen") #--#
+    histo_tautomu_genreco   = histofile.Get("tautomu_genreco") #--#
     histo_jet_gen   = histofile.Get("jet_gen")
     histo_jet_genreco   = histofile.Get("jet_genreco")
 
     #ele + tautoele
-    histo_ele_gen.Add(histo_tautoele_gen)
-    histo_ele_genreco.Add(histo_tautoele_genreco)
+    histo_ele_gen.Add(histo_tautoele_gen) #--#
+    histo_ele_genreco.Add(histo_tautoele_genreco) #--#
     #mu + tautomu
-    histo_mu_gen.Add(histo_tautomu_gen)
-    histo_mu_genreco.Add(histo_tautomu_genreco)
+    histo_mu_gen.Add(histo_tautomu_gen) #--#
+    histo_mu_genreco.Add(histo_tautomu_genreco) #--#
 
     #remove bins with small number of entries
     cleanHisto(histo_ele_gen)
@@ -177,9 +194,15 @@ elif advancedPlots == 1:
     plotPretty(histo_eff_ele,"histo_eff_ele_WW.eps",0)
     plotPretty(histo_eff_mu,"histo_eff_mu_WW.eps",1)
     plotPretty(histo_eff_jet,"histo_eff_jet_WW.eps",4)
+    plotPretty(histo_eff_ele,"histo_eff_ele_WW.pdf",0)
+    plotPretty(histo_eff_mu,"histo_eff_mu_WW.pdf",1)
+    plotPretty(histo_eff_jet,"histo_eff_jet_WW.pdf",4)
+    plotPretty(histo_eff_ele,"histo_eff_ele_WW.C",0)
+    plotPretty(histo_eff_mu,"histo_eff_mu_WW.C",1)
+    plotPretty(histo_eff_jet,"histo_eff_jet_WW.C",4)
 
     output = root.TFile.Open("efficiency_WW_forClosure.root","RECREATE")
     histo_eff_ele.Write()
     histo_eff_mu.Write()
     histo_eff_jet.Write()
-    histo_eff_event.Write()
+    histo_eff_event.Write() #--#
